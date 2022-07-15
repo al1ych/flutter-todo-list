@@ -27,6 +27,8 @@ class BoardController extends GetxController with GetTickerProviderStateMixin {
     _init();
   }
 
+
+
   _init() async {
     await _fetch();
     applyCategory(category: 'all');

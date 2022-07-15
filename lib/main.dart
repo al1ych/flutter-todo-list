@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:testovoe/feature/board/api/board_service.dart';
 import 'package:testovoe/feature/board/controller/board_controller.dart';
+import 'package:testovoe/feature/new_task/controller/new_task_controller.dart';
 import 'package:testovoe/feature/splash/splash_page.dart';
 
 void main() {
@@ -19,6 +20,7 @@ void main() {
 void setupInjections() {
   Get.put(BoardService());
   Get.put(BoardController());
+  Get.put(NewTaskController());
 }
 
 class MyApp extends StatelessWidget {

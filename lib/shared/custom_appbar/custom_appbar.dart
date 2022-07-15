@@ -29,13 +29,14 @@ class _CustomAppBarState extends State<CustomAppBar> {
         automaticallyImplyLeading: false,
         title: Text(
           widget.title,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black,
+            fontWeight: FontWeight.bold,
           ),
         ),
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               CupertinoIcons.search,
               color: Colors.black,
               size: 20,
@@ -43,7 +44,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               CupertinoIcons.bell,
               color: Colors.black,
               size: 20,
@@ -53,7 +54,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
             child: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.menu,
                 color: Colors.black,
                 size: 20,
