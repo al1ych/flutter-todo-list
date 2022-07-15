@@ -1,5 +1,4 @@
 # Todo list Application
-
 Stack: Flutter, Dart.
 
 ## APK
