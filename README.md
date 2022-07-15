@@ -2,7 +2,7 @@
 
 Stack: Flutter, Dart.
 
-## Build from source
+## Build and run from source
 0. Prerequisites: You should have Flutter already installed.
 1. Download/clone this repo.
 2. Navigate to the root of the downloaded project.
