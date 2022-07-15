@@ -2,6 +2,14 @@
 
 Stack: Flutter, Dart.
 
+## Build from source
+0. Prerequisites: You should have Flutter already installed.
+1. Download/clone this repo.
+2. Navigate to the root of the downloaded project.
+3. run `flutter run`.
+4. ???
+5. Voilà.
+
 ## APK
 
 Download APK here: https://github.com/al1ych/flutter-todo-list/blob/master/build/app/outputs/flutter-apk/app-release.apk
