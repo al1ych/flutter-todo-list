@@ -6,7 +6,7 @@ Stack: Flutter, Dart.
 0. Prerequisites: You should have Flutter already installed.
 1. Download/clone this repo.
 2. Navigate to the root of the downloaded project.
-3. run `flutter run`.
+3. Run `flutter run`.
 4. ???
 5. Voilà.
 
