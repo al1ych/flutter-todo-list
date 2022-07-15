@@ -10,7 +10,7 @@ _$_TaskModel _$$_TaskModelFromJson(Map<String, dynamic> json) => _$_TaskModel(
       id: json['id'] as int,
       userId: json['user_id'] as int,
       title: json['title'] as String,
-      dueOn: DateTime.parse(json['due_on'] as String),
+      dueOn: json['due_on'] as String,
       status: json['status'] as String,
       categories: (json['categories'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -22,7 +22,7 @@ Map<String, dynamic> _$$_TaskModelToJson(_$_TaskModel instance) =>
       'id': instance.id,
       'user_id': instance.userId,
       'title': instance.title,
-      'due_on': instance.dueOn.toIso8601String(),
+      'due_on': instance.dueOn,
       'status': instance.status,
       'categories': instance.categories,
     };

@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'task_model.freezed.dart';
-
 part 'task_model.g.dart';
 
 @freezed
@@ -10,7 +9,7 @@ class TaskModel with _$TaskModel {
     required int id,
     @JsonKey(name: 'user_id') required int userId,
     required String title,
-    @JsonKey(name: 'due_on') required DateTime dueOn,
+    @JsonKey(name: 'due_on') required String dueOn,
     required String status,
     List<String>? categories,
   }) = _TaskModel;

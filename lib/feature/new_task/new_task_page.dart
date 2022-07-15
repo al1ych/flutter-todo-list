@@ -1,17 +1,27 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:testovoe/feature/board/board_page.dart';
 import 'package:testovoe/feature/new_task/widget/basic_datetime_field.dart';
 import 'package:testovoe/feature/new_task/widget/dropdown_field.dart';
 import 'package:testovoe/feature/new_task/widget/field_decoration.dart';
 import 'package:testovoe/shared/custom_appbar/custom_appbar.dart';
 
+import '../board/controller/board_controller.dart';
+import '../board/model/task_model.dart';
 import 'controller/new_task_controller.dart';
 
 class NewTaskPage extends StatelessWidget {
   final newTaskController = Get.find<NewTaskController>();
+  final boardController = Get.find<BoardController>();
 
   final _formKey = GlobalKey<FormState>();
+  final _titleController = TextEditingController();
+  final _dateController = TextEditingController();
+  final _startController = TextEditingController();
+  final _endController = TextEditingController();
 
   NewTaskPage({
     Key? key,
@@ -32,21 +42,21 @@ class NewTaskPage extends StatelessWidget {
                   child: ListView(
                     physics: const BouncingScrollPhysics(),
                     children: [
-                      _buildTextFormField('Title', 'title'),
+                      _buildTextFormField('Title', 'title', _titleController),
                       const SizedBox(height: 16),
-                      _buildTextFormField('Deadline', 'date'),
+                      _buildTextFormField('Deadline', 'date', _dateController),
                       const SizedBox(height: 16),
                       Row(
                         children: [
-                          Expanded(child: _buildTextFormField('Start time', 'time')),
+                          Expanded(child: _buildTextFormField('Start time', 'time', _startController)),
                           const SizedBox(width: 16),
-                          Expanded(child: _buildTextFormField('End time', 'time')),
+                          Expanded(child: _buildTextFormField('End time', 'time', _endController)),
                         ],
                       ),
                       const SizedBox(height: 16),
-                      _buildTextFormField('Remind', 'dropdown'),
+                      _buildTextFormField('Remind', 'dropdown', GlobalKey()),
                       const SizedBox(height: 16),
-                      _buildTextFormField('Repeat', 'dropdown'),
+                      _buildTextFormField('Repeat', 'dropdown', GlobalKey()),
                       const SizedBox(height: 128),
                     ],
                   ),
@@ -75,11 +85,57 @@ class NewTaskPage extends StatelessWidget {
     );
   }
 
-  Widget _buildTextFormField(String fieldTitle, String fieldType) {
+  _onCreateTask(context) {
+    _submitForm(context);
+  }
+
+  _submitForm(context) {
+    var rng = Random();
+    if (_formKey.currentState!.validate()) {
+      Get.snackbar(
+        'Create task',
+        'Successfully added the task!',
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.symmetric(vertical: 86, horizontal: 16),
+        icon: const Icon(CupertinoIcons.app_fill, color: Colors.greenAccent),
+        duration: Duration(seconds: 1),
+      );
+      _formKey.currentState?.save();
+      boardController.addNewTask(
+        task: TaskModel(
+          title: _titleController.text,
+          dueOn: _dateController.text,
+          userId: rng.nextInt(100000) + 1000,
+          id: rng.nextInt(100000) + 1000,
+          status: 'pending',
+          categories: ['all', 'pending'],
+        ),
+      );
+      Future.delayed(const Duration(seconds: 2), () {
+        Get.off(
+          () => BoardPage(),
+          transition: Transition.fade,
+          duration: const Duration(seconds: 1),
+        );
+      });
+    } else {
+      Get.snackbar(
+        'Create task',
+        'Oops... Check if you filled everything correctly.',
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.symmetric(vertical: 86, horizontal: 16),
+        icon: const Icon(CupertinoIcons.app_fill, color: Color(0xFFF06969)),
+      );
+    }
+    newTaskController.disableSubmit();
+  }
+
+  Widget _buildTextFormField(String fieldTitle, String fieldType, controller) {
     Widget _field;
     switch (fieldType) {
       case 'title':
         _field = TextFormField(
+          controller: controller,
           validator: (String? value) {
             if (value == null || value.isEmpty) {
               return 'Please enter some text';
@@ -91,6 +147,7 @@ class NewTaskPage extends StatelessWidget {
         break;
       case 'date':
         _field = BasicDateField(
+          controller: controller,
           validator: (DateTime? value) {
             if (value == null) {
               return 'Deadline cannot be empty';
@@ -104,6 +161,7 @@ class NewTaskPage extends StatelessWidget {
         break;
       case 'time':
         _field = BasicTimeField(
+          controller: controller,
           validator: (DateTime? value) {
             if (value == null) {
               return 'Deadline cannot be empty';
@@ -143,30 +201,5 @@ class NewTaskPage extends StatelessWidget {
         _field,
       ],
     );
-  }
-
-  _onCreateTask(context) {
-    _submitForm(context);
-  }
-
-  _submitForm(context) {
-    if (_formKey.currentState!.validate()) {
-      Get.snackbar(
-        'Create task',
-        'Successfully added the task!',
-        snackPosition: SnackPosition.BOTTOM,
-        margin: const EdgeInsets.symmetric(vertical: 86, horizontal: 16),
-        icon: const Icon(CupertinoIcons.app_fill, color: Colors.greenAccent),
-      );
-    } else {
-      Get.snackbar(
-        'Create task',
-        'Oops... Check if you filled everything correctly.',
-        snackPosition: SnackPosition.BOTTOM,
-        margin: const EdgeInsets.symmetric(vertical: 86, horizontal: 16),
-        icon: const Icon(CupertinoIcons.app_fill, color: Color(0xFFF06969)),
-      );
-      newTaskController.disableSubmit();
-    }
   }
 }

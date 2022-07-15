@@ -7,10 +7,12 @@ import 'package:testovoe/feature/new_task/widget/field_decoration.dart';
 class BasicDateField extends StatelessWidget {
   final format = DateFormat("yyyy-MM-dd");
   String? Function(DateTime?)? validator;
+  TextEditingController controller;
 
   BasicDateField({
     Key? key,
     this.validator,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -19,6 +21,7 @@ class BasicDateField extends StatelessWidget {
       DateTimeField(
         format: format,
         validator: validator,
+        controller: controller,
         decoration: fieldDecoration.copyWith(suffixIcon: const Icon(CupertinoIcons.calendar), hintText: '2018-02-28'),
         onShowPicker: (context, currentValue) {
           return showDatePicker(
@@ -36,10 +39,12 @@ class BasicDateField extends StatelessWidget {
 class BasicTimeField extends StatelessWidget {
   final format = DateFormat("hh:mm a");
   String? Function(DateTime?)? validator;
+  TextEditingController controller;
 
   BasicTimeField({
     Key? key,
     this.validator,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -48,6 +53,7 @@ class BasicTimeField extends StatelessWidget {
       DateTimeField(
         format: format,
         validator: validator,
+        controller: controller,
         decoration: fieldDecoration.copyWith(
           suffixIcon: const Icon(CupertinoIcons.time),
           hintText: '11:09 AM',

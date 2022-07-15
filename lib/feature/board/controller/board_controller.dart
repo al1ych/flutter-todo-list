@@ -27,8 +27,6 @@ class BoardController extends GetxController with GetTickerProviderStateMixin {
     _init();
   }
 
-
-
   _init() async {
     await _fetch();
     applyCategory(category: 'all');
@@ -108,5 +106,10 @@ class BoardController extends GetxController with GetTickerProviderStateMixin {
         )
         .toList();
     filteredTasks.refresh();
+  }
+
+  addNewTask({required TaskModel task}) {
+    tasks.add(task);
+    applyCategory();
   }
 }

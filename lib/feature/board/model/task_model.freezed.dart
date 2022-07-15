@@ -25,7 +25,7 @@ mixin _$TaskModel {
   int get userId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   @JsonKey(name: 'due_on')
-  DateTime get dueOn => throw _privateConstructorUsedError;
+  String get dueOn => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   List<String>? get categories => throw _privateConstructorUsedError;
 
@@ -43,7 +43,7 @@ abstract class $TaskModelCopyWith<$Res> {
       {int id,
       @JsonKey(name: 'user_id') int userId,
       String title,
-      @JsonKey(name: 'due_on') DateTime dueOn,
+      @JsonKey(name: 'due_on') String dueOn,
       String status,
       List<String>? categories});
 }
@@ -81,7 +81,7 @@ class _$TaskModelCopyWithImpl<$Res> implements $TaskModelCopyWith<$Res> {
       dueOn: dueOn == freezed
           ? _value.dueOn
           : dueOn // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -104,7 +104,7 @@ abstract class _$$_TaskModelCopyWith<$Res> implements $TaskModelCopyWith<$Res> {
       {int id,
       @JsonKey(name: 'user_id') int userId,
       String title,
-      @JsonKey(name: 'due_on') DateTime dueOn,
+      @JsonKey(name: 'due_on') String dueOn,
       String status,
       List<String>? categories});
 }
@@ -144,7 +144,7 @@ class __$$_TaskModelCopyWithImpl<$Res> extends _$TaskModelCopyWithImpl<$Res>
       dueOn: dueOn == freezed
           ? _value.dueOn
           : dueOn // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -181,7 +181,7 @@ class _$_TaskModel implements _TaskModel {
   final String title;
   @override
   @JsonKey(name: 'due_on')
-  final DateTime dueOn;
+  final String dueOn;
   @override
   final String status;
   final List<String>? _categories;
@@ -239,7 +239,7 @@ abstract class _TaskModel implements TaskModel {
       {required final int id,
       @JsonKey(name: 'user_id') required final int userId,
       required final String title,
-      @JsonKey(name: 'due_on') required final DateTime dueOn,
+      @JsonKey(name: 'due_on') required final String dueOn,
       required final String status,
       final List<String>? categories}) = _$_TaskModel;
 
@@ -255,7 +255,7 @@ abstract class _TaskModel implements TaskModel {
   String get title;
   @override
   @JsonKey(name: 'due_on')
-  DateTime get dueOn;
+  String get dueOn;
   @override
   String get status;
   @override
